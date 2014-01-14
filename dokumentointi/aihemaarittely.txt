@@ -1,0 +1,14 @@
+Toteutetaan A* visualisoija.
+
+käyttäjä voi käyttöliittymässä määrittää aloitus ja päätöspaikan (taulukossa). Tämän jälkeen käyttäjä voi vielä piirtää seiniä, joita algoritmi osaa kiertää.
+
+Extra jos aikaa jää: Käyttäjä voi ladata kartan (taulukon) kuvatiedostosta ja määrittää siihen aloitus- ja lopetuspisteen.
+
+Extra2 jos aikaa jää: Käyttäjä voi luoda kovuuksilla seiniä, joista algoritmi etsii vähiten "maksavan" reitin.
+
+Aikavaativuus A*:lla tulee (s2013 luentomonisteen mukaan): O((|E|+|V|)log|V|)
+Tilavaativuus tulee olemaan O(|V|)
+
+lähteinä tulen käyttämään ainakin s2013 luentomonistetta: http://www.cs.helsinki.fi/u/floreen/tira2013syksy/tira.pdf
+
+
