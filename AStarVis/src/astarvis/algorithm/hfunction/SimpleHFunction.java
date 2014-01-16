@@ -10,7 +10,7 @@ public class SimpleHFunction implements HFunction{
 
     @Override
     public int estimate(Node from, Node goal) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return goal.getCost();
     }
     
 }
