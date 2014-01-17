@@ -1,6 +1,7 @@
 package astarvis.gui;
 import astarvis.ds.Node;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.*;
 
@@ -22,6 +23,7 @@ public class Drawer extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        g.setFont(new Font("TimesRoman",Font.PLAIN,10));
         g.setColor(Color.black);
         g.fill3DRect(0, 0, w*scale, h*scale, false);
         
@@ -34,15 +36,15 @@ public class Drawer extends JPanel {
                     g.setColor(Color.red);
                 }  
                 else{
-                    g.setColor(Color.white);
+                    g.setColor(new Color(255-n.getCost(),255-n.getCost(),255-n.getCost()));
                 }
                 g.fill3DRect(x*scale, y*scale, scale, scale, true);
                 
                 g.setColor(Color.black);
-                g.drawString(n.getCost()+"", x*scale+5, y*scale+15);
+                g.drawString(n.getCost()+"", x*scale, y*scale+15);
             }
         }
-        
+        g.drawString("Press R to generate (new) Random maze, M to generate Maze", 10, (h+1)*scale);
     }
     
 }

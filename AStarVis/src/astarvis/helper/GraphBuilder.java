@@ -6,11 +6,14 @@
 
 package astarvis.helper;
 
+import astarvis.algorithm.Astar;
+import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.Node;
 import astarvis.ds.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
@@ -58,5 +61,33 @@ public class GraphBuilder {
             }
         }
         return new Graph(allNodes,edges,start,goal);
+    }
+    public static Graph buildRandom(int h, int w){
+        // initialize random
+        Random r = new Random();
+        int[][] weigth = new int[h][w];
+        
+        for(int y = 0; y < h; y++){
+            for(int x = 0; x < w; x++){
+                weigth[y][x] = r.nextBoolean() ? r.nextInt(200) : r.nextInt(Math.max(x, y)*2+1);
+            }
+        }
+        Point start = new Point(0,0);
+        Point goal = new Point(w-1,h-1);
+        
+        return GraphBuilder.build(weigth,h,w,start,goal);
+    }
+    public static Graph buildMaze(int h,int w){
+        int[][] weigth = new int[h][w];
+        
+        for(int y = 0; y < h; y++){
+            for(int x = 0; x < w; x++){
+                weigth[y][x] = (x % 2 == 0 && (!(x % 4 != 0 && y+1 == h) && !(x % 4 != 2 && y == 0))) ? 128 : 0;
+            }
+        }
+        Point start = new Point(0,0);
+        Point goal = new Point(w-1,h-1);
+        
+        return GraphBuilder.build(weigth,h,w,start,goal);
     }
 }

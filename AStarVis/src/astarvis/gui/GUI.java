@@ -44,9 +44,9 @@ public class GUI implements Runnable {
         this.d = drawer;
         container.add(d);
         
-        //Nappaimistonkuuntelija nk = new Nappaimistonkuuntelija(this.peli.getKartta());
+        KeyListener nk = new KeyListener(ctrl);
         
-        //this.frame.addKeyListener(nk);
+        this.frame.addKeyListener(nk);
     }
  
  

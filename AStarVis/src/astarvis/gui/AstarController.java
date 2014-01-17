@@ -37,19 +37,7 @@ public class AstarController extends Timer implements ActionListener {
         this.w = 30;
         this.h = 40;
         
-        // initialize random
-        Random r = new Random();
-        int[][] weigth = new int[h][w];
-        
-        for(int y = 0; y < h; y++){
-            for(int x = 0; x < w; x++){
-                weigth[y][x] = r.nextInt(x+y+1);
-            }
-        }
-        Point start = new Point(0,0);
-        Point goal = new Point(29,39);
-        g = GraphBuilder.build(weigth,40,30,start,goal);
-        this.astar = new Astar(g,new SimpleHFunction());
+        reset(false);
         
         
         addActionListener(this);
@@ -89,6 +77,10 @@ public class AstarController extends Timer implements ActionListener {
     }
     public ArrayList<Node> getPath(){
         return astar.getPath();
+    }
+    public void reset(boolean random){
+        this.g = random ? GraphBuilder.buildRandom(h, w) : GraphBuilder.buildMaze(h, w);
+        this.astar = new Astar(g,new SimpleHFunction());
     }
 
 }
