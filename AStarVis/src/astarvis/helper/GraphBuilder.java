@@ -60,7 +60,7 @@ public class GraphBuilder {
                 }
             }
         }
-        return new Graph(allNodes,edges,start,goal);
+        return new Graph(allNodes,edges,start,goal,new Point(w,h));
     }
     public static Graph buildRandom(int h, int w){
         // initialize random
@@ -69,7 +69,7 @@ public class GraphBuilder {
         
         for(int y = 0; y < h; y++){
             for(int x = 0; x < w; x++){
-                weigth[y][x] = r.nextBoolean() ? r.nextInt(200) : r.nextInt(Math.max(x, y)*2+1);
+                weigth[y][x] = (r.nextBoolean() ? r.nextInt(200) : r.nextInt(Math.max(x, y)*2+1)) % 255;
             }
         }
         Point start = new Point(0,0);

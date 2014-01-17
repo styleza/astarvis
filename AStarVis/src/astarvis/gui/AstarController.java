@@ -37,11 +37,11 @@ public class AstarController extends Timer implements ActionListener {
         this.w = 30;
         this.h = 40;
         
-        reset(false);
+        reset(true);
         
         
         addActionListener(this);
-        setInitialDelay(500);
+        setInitialDelay(0);
         
         continues = true;
         
