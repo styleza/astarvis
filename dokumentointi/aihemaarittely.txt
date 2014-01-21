@@ -11,4 +11,15 @@ Tilavaativuus tulee olemaan O(|V|)
 
 lähteinä tulen käyttämään ainakin s2013 luentomonistetta: http://www.cs.helsinki.fi/u/floreen/tira2013syksy/tira.pdf
 
-
+Tietorakenteiden aikavaativuudet:
+Minimikeko:
+	pop()		O(1)
+	insert()	O(log n)
+	
+Hajautustaulu:
+	search()	O(1) (keskimäärin)
+	insert()	O(1) (keskimäärin)
+	
+Oma ArrayList:
+	insert()	O(n)
+	get()		O(1)
