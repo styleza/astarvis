@@ -40,7 +40,7 @@ public class AstarTest {
         Point start = new Point(0,0);
         Point goal = new Point(1,1);
         Graph g = GraphBuilder.build(w,2,2,start,goal);
-        Astar a = new Astar(g,new SimpleHFunction());
+        Astar a = new Astar(g,new SimpleHFunction(),false);
         ArrayList<Node> path = a.getPath();
         assertEquals(3,path.size());
         assertSame(path.get(0),g.getGoal());
@@ -59,7 +59,7 @@ public class AstarTest {
         Point start = new Point(0,0);
         Point goal = new Point(1,1);
         Graph g = GraphBuilder.build(w,2,2,start,goal);
-        Astar a = new Astar(g,new SimpleHFunction());
+        Astar a = new Astar(g,new SimpleHFunction(),false);
         ArrayList<Node> path = a.getPath();
         assertEquals(3,path.size());
         assertSame(path.get(0),g.getGoal());
@@ -81,7 +81,7 @@ public class AstarTest {
         Point start = new Point(0,0);
         Point goal = new Point(3,3);
         Graph g = GraphBuilder.build(w,4,4,start,goal);
-        Astar a = new Astar(g,new SimpleHFunction());
+        Astar a = new Astar(g,new SimpleHFunction(),false);
         ArrayList<Node> path = a.getPath();
         assertNotNull(path);
         assertEquals(7,path.size());
@@ -108,7 +108,7 @@ public class AstarTest {
         Point start = new Point(0,0);
         Point goal = new Point(3,3);
         Graph g = GraphBuilder.build(w,4,4,start,goal);
-        Astar a = new Astar(g,new SimpleHFunction());
+        Astar a = new Astar(g,new SimpleHFunction(),false);
         ArrayList<Node> path = a.getPath();
         assertNotNull(path);
         assertEquals(7,path.size());

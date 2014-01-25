@@ -98,7 +98,18 @@ public class AstarController extends Timer implements ActionListener {
      */
     public void reset(boolean random){
         this.g = random ? GraphBuilder.buildRandom(h, w) : GraphBuilder.buildMaze(h, w);
-        this.astar = new Astar(g,new SimpleHFunction());
+        this.astar = new Astar(g,new SimpleHFunction(),true);
+        if(this.d != null){
+            this.d.setTick(0);
+        }
+
+    }
+    
+    public ArrayList<Point> getLookupHistory(int to){
+        if(to >= this.astar.getLookupHistory().size()){
+            return this.astar.getLookupHistory();
+        }
+        return new ArrayList<Point>(this.astar.getLookupHistory().subList(0, to));
     }
 
 }

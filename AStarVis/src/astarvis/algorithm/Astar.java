@@ -4,6 +4,7 @@ import astarvis.algorithm.hfunction.HFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.MinimumHeap;
 import astarvis.ds.Node;
+import astarvis.ds.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,6 +25,8 @@ public class Astar {
     private HashMap<Node, Integer> gScore;
     private MinimumHeap open;
     boolean solved;
+    boolean saveLookupHistory;
+    private ArrayList<Point> history;
     
     /**
      * Initialize and solve shortest path in graph
@@ -31,7 +34,7 @@ public class Astar {
      * @param graph
      * @param heurastic 
      */
-    public Astar(Graph graph,HFunction heurastic){
+    public Astar(Graph graph,HFunction heurastic, boolean saveLookupHistory){
         this.start = graph.getStart();
         this.goal = graph.getGoal();
         this.graph = graph;
@@ -49,8 +52,15 @@ public class Astar {
         //openset.add(start);
         
         solved = false;
+        
+        this.saveLookupHistory = saveLookupHistory;
+        if(saveLookupHistory){
+            history = new ArrayList<Point>();
+        }
+        
         solve();
     }
+
     
     /**
      * Solves the shortest (most "cheap") path using A* algorithm
@@ -60,6 +70,10 @@ public class Astar {
         while(!open.isEmpty()){
             
             Node current = open.poll();
+            
+            if(saveLookupHistory){
+                history.add(current.getLocation());
+            }
             
             if(current == goal){
                 solved = true;
@@ -106,5 +120,10 @@ public class Astar {
             }
         }
         return returnValue;
+    }
+    
+    public ArrayList<Point> getLookupHistory(){
+        return this.history;
+        
     }
 }
