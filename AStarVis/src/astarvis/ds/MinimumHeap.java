@@ -14,20 +14,23 @@ public class MinimumHeap {
     }
     
     public void add(Node n, Integer i){
-        queue.add(new Pair<Node,Integer>(n,i));
+        Pair p = new Pair<Node,Integer>(n,i);
+        queue.add(null);
+        int it = queue.size()-1;
+        while(it > 0 && queue.get(it/2).getSecond() > i){
+            queue.set(it,queue.get(it/2));
+            it = it/2;
+        }
+
+        queue.set(it,p);
     }
     
-    //@TODO: Make this more efficient (minimumheap)
     public Node poll(){
+        if(queue.size() == 0) return null;
         Pair<Node, Integer> min = queue.get(0);
-        int remove_i = 0;
-        for(int i = 1; i < queue.size(); i++){
-            if(min.getSecond() > queue.get(i).getSecond()){
-                min = queue.get(i);
-                remove_i = i;
-            }
-        }
-        queue.remove(remove_i);
+        queue.set(0,queue.get(queue.size()-1));
+        queue.remove(queue.size()-1);
+        heapify(0);
         return min.getFirst();
     }
     
@@ -42,5 +45,32 @@ public class MinimumHeap {
             }
         }
         return false;
+    }
+    
+    private void heapify(int i){
+        int l = 2*i;
+        int r = l +1;
+        int lrg = i;
+        
+        if(l < queue.size() &&
+                queue.get(l).getSecond() < queue.get(lrg).getSecond()){
+            lrg = l;
+        }
+        
+        if(r < queue.size() &&
+                queue.get(r).getSecond() < queue.get(lrg).getSecond()){
+            lrg = r;
+        }
+        
+        if(lrg != i){
+            swap(i,lrg);
+            heapify(lrg);
+        }
+    }
+    
+    private void swap(int a, int b){
+        Pair tmp = queue.get(a);
+        queue.set(a,queue.get(b));
+        queue.set(b,tmp);
     }
 }
