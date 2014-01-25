@@ -16,10 +16,20 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- *
+ * Builds different kind of graphs
  * @author Ilari
  */
 public class GraphBuilder {
+    
+    /**
+     * Builds graph with specified data
+     * @param weights
+     * @param h
+     * @param w
+     * @param startPoint
+     * @param goalPoint
+     * @return 
+     */
     public static Graph build(int[][] weights,int h,int w,Point startPoint, Point goalPoint){
         ArrayList<Node> allNodes = new ArrayList<Node>();
         HashMap<Node, ArrayList<Node> > edges = new HashMap<Node, ArrayList<Node> >();
@@ -62,6 +72,13 @@ public class GraphBuilder {
         }
         return new Graph(allNodes,edges,start,goal,new Point(w,h));
     }
+    
+    /**
+     * Builds random graph
+     * @param h
+     * @param w
+     * @return 
+     */
     public static Graph buildRandom(int h, int w){
         // initialize random
         Random r = new Random();
@@ -77,6 +94,13 @@ public class GraphBuilder {
         
         return GraphBuilder.build(weigth,h,w,start,goal);
     }
+    
+    /**
+     * Builds maze graph
+     * @param h
+     * @param w
+     * @return 
+     */
     public static Graph buildMaze(int h,int w){
         int[][] weigth = new int[h][w];
         

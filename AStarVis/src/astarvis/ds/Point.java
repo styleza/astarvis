@@ -7,7 +7,7 @@
 package astarvis.ds;
 
 /**
- *
+ * Point datastructure
  * @author ilri@cs
  */
 public class Point {

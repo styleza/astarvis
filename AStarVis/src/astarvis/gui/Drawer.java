@@ -5,7 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.*;
 
-
+/**
+ * Draws GUI elements to screen
+ * @author Ilari
+ */
 public class Drawer extends JPanel {
     AstarController ctrl;
     int scale;
@@ -13,6 +16,11 @@ public class Drawer extends JPanel {
     int h;
     
 
+    /**
+     * Initilize Drawer
+     * @param ctrl
+     * @param scale 
+     */
     public Drawer(AstarController ctrl, int scale){
         this.ctrl = ctrl;
         this.scale = scale;
@@ -20,6 +28,10 @@ public class Drawer extends JPanel {
         this.h = ctrl.getHeight();
     }
     
+    /**
+     * Handles all drawing
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

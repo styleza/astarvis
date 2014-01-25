@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Solves shortest path in graph using A* algorithm 
  * @author ilri@cs
  */
 public class Astar {
@@ -25,6 +25,12 @@ public class Astar {
     private MinimumHeap open;
     boolean solved;
     
+    /**
+     * Initialize and solve shortest path in graph
+     * You must also define heurastic function to estimated costs between point A and goal
+     * @param graph
+     * @param heurastic 
+     */
     public Astar(Graph graph,HFunction heurastic){
         this.start = graph.getStart();
         this.goal = graph.getGoal();
@@ -46,6 +52,9 @@ public class Astar {
         solve();
     }
     
+    /**
+     * Solves the shortest (most "cheap") path using A* algorithm
+     */
     private void solve(){
         
         while(!open.isEmpty()){
@@ -75,6 +84,11 @@ public class Astar {
         }
         solved = false;
     }
+    
+    /**
+     * Returns path after it's solved
+     * @return 
+     */
     public ArrayList<Node> getPath(){
         ArrayList<Node> returnValue = new ArrayList<Node>();
         if(!solved){
