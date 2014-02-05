@@ -12,7 +12,7 @@ import astarvis.ds.Graph;
 import astarvis.ds.Node;
 import astarvis.ds.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
+import astarvis.ds.HashMap;
 import java.util.Random;
 
 /**

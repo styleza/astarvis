@@ -10,7 +10,7 @@ package astarvis.ds;
  * Node data structure
  * @author ilri@cs
  */
-public class Node {
+public class Node implements Hashable {
     private Point location;
     private int cost;
     
@@ -38,5 +38,10 @@ public class Node {
      */
     public int getCost(){
         return this.cost;
+    }
+
+    @Override
+    public int hashKey() {
+        return this.location.getX()+this.location.getY()*3+this.cost*7;
     }
 }

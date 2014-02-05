@@ -7,6 +7,7 @@
 package astarvis.gui;
 
 import astarvis.algorithm.Astar;
+import astarvis.algorithm.hfunction.DirectingHFunction;
 import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.Node;
@@ -98,7 +99,7 @@ public class AstarController extends Timer implements ActionListener {
      */
     public void reset(boolean random){
         this.g = random ? GraphBuilder.buildRandom(h, w) : GraphBuilder.buildMaze(h, w);
-        this.astar = new Astar(g,new SimpleHFunction(),true);
+        this.astar = new Astar(g,new DirectingHFunction(),true);
         if(this.d != null){
             this.d.setTick(0);
         }
