@@ -9,14 +9,24 @@ package astarvis.gui;
 import java.awt.event.KeyEvent;
 
 /**
- *
+ * Key listener for AstarVis
  * @author k020398
  */
 public class KeyListener implements java.awt.event.KeyListener {
     private AstarController ctrl;
+    
+    /**
+     * Initialize key listener with Astar controller
+     * @param ctrl 
+     */
     public KeyListener(AstarController ctrl){
         this.ctrl = ctrl;
     }
+    
+    /**
+     * Detects key presses
+     * @param e 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()){

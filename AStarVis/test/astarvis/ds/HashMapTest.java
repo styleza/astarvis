@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import astarvis.ds.HashMap;
+import java.util.ArrayList;
 
 
 /**
@@ -53,6 +54,32 @@ public class HashMapTest {
             Node tmp = g(i,i);
             assertTrue("HashMap insert failed at #"+i,hm.put(tmp, i));
         }
+        
+    }
+    
+    @Test
+    public void fullFill(){
+        ArrayList<Node> order = new ArrayList<Node>();
+        for(int i = 0; i < 15000; i++){
+            Node tmp = g(i,i);
+            order.add(tmp);
+            assertTrue(hm.put(tmp,i));
+        }
+        for(Node a : order){
+            assertEquals((int)a.getLocation().getX(),(int)hm.get(a));
+        }
+        Node scd = g(0,0);
+        assertFalse(hm.put(scd,0));
+    }
+    
+    @Test
+    public void replacementWorks(){
+        Node a = g(0,0);
+        hm.put(a, 1);
+        assertEquals(1,(int)hm.get(a));
+        
+        hm.put(a,2);
+        assertEquals(2,(int)hm.get(a));
         
     }
 }

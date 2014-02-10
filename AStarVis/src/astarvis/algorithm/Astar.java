@@ -6,9 +6,7 @@ import astarvis.ds.MinimumHeap;
 import astarvis.ds.Node;
 import astarvis.ds.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import astarvis.ds.HashMap;
 
 /**
  * Solves shortest path in graph using A* algorithm 
@@ -19,8 +17,7 @@ public class Astar {
     private Node goal;
     private Graph graph;
     private HFunction heurastic;
-    private Set<Node> closedset;
-    private Set<Node> openset;
+    private ArrayList<Node> closedset;
     private HashMap<Node, Node> cameFrom;
     private HashMap<Node, Integer> gScore;
     private MinimumHeap open;
@@ -39,8 +36,8 @@ public class Astar {
         this.goal = graph.getGoal();
         this.graph = graph;
         this.heurastic = heurastic;
-        this.closedset = new HashSet<Node>();
-        this.openset = new HashSet<Node>();
+        this.closedset = new ArrayList<Node>();
+        //this.openset = new HashSet<Node>();
         this.cameFrom = new HashMap<Node, Node>();
         this.gScore = new HashMap<Node, Integer>();
         this.open = new MinimumHeap();
@@ -122,6 +119,11 @@ public class Astar {
         return returnValue;
     }
     
+    /**
+     * Returns lookup history, points where A* algorithm visited
+     * saveLookupHistory flag must be true if you want to save lookup history
+     * @return 
+     */
     public ArrayList<Point> getLookupHistory(){
         return this.history;
         

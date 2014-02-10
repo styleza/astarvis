@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package astarvis.algorithm.hfunction;
 
 import astarvis.ds.Node;
 
 /**
- *
+ * Directing heurastic function,
+ * estimates costs using distance between point A and B
  * @author Ilari
  */
 public class DirectingHFunction implements HFunction{

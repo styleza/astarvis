@@ -106,6 +106,11 @@ public class AstarController extends Timer implements ActionListener {
 
     }
     
+    /**
+     * Returns lookup history (points where A* has visited)
+     * @param to
+     * @return 
+     */
     public ArrayList<Point> getLookupHistory(int to){
         if(to >= this.astar.getLookupHistory().size()){
             return this.astar.getLookupHistory();

@@ -14,12 +14,19 @@ public class GUI implements Runnable {
     
     private int scale;
     
+    /**
+     * GUI interface
+     * @param ctrl 
+     */
     public GUI(AstarController ctrl) {
         this.ctrl = ctrl;
         this.scale = 20;
     }
  
 
+    /**
+     * Initializes window
+     */
     @Override
     public void run() {
         frame = new JFrame("A*vis");
@@ -38,6 +45,10 @@ public class GUI implements Runnable {
         frame.setVisible(true);
     }
     
+    /**
+     * Creates components
+     * @param container 
+     */
     public void createComponents(Container container) {
 
         Drawer drawer = new Drawer(ctrl,this.scale);
@@ -50,10 +61,18 @@ public class GUI implements Runnable {
     }
  
  
+    /**
+     * Returns GUI's frame
+     * @return 
+     */
     public JFrame getFrame() {
         return frame;
     }
     
+    /**
+     * Returns GUI's drawer
+     * @return 
+     */
     public Drawer getDrawer(){
         return this.d;
     }

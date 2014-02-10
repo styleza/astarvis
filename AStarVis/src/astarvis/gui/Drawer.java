@@ -66,6 +66,10 @@ public class Drawer extends JPanel {
         tick++;
     }
     
+    /**
+     * Sets tick (animation point)
+     * @param t 
+     */
     public void setTick(int t){
         this.tick = t;
     }

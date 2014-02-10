@@ -40,8 +40,12 @@ public class Node implements Hashable {
         return this.cost;
     }
 
+    /**
+     * Returns hash key for this object
+     * @return 
+     */
     @Override
     public int hashKey() {
-        return this.location.getX()+this.location.getY()*3+this.cost*7;
+        return this.location.getX()*743+this.location.getY()*149+this.cost*283;
     }
 }
