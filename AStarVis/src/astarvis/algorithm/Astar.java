@@ -4,13 +4,14 @@ import astarvis.algorithm.hfunction.HFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.MinimumHeap;
 import astarvis.ds.Node;
+import astarvis.ds.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Solves shortest path in graph using A* algorithm 
  * @author ilri@cs
  */
 public class Astar {
@@ -24,8 +25,16 @@ public class Astar {
     private HashMap<Node, Integer> gScore;
     private MinimumHeap open;
     boolean solved;
+    boolean saveLookupHistory;
+    private ArrayList<Point> history;
     
-    public Astar(Graph graph,HFunction heurastic){
+    /**
+     * Initialize and solve shortest path in graph
+     * You must also define heurastic function to estimated costs between point A and goal
+     * @param graph
+     * @param heurastic 
+     */
+    public Astar(Graph graph,HFunction heurastic, boolean saveLookupHistory){
         this.start = graph.getStart();
         this.goal = graph.getGoal();
         this.graph = graph;
@@ -43,14 +52,28 @@ public class Astar {
         //openset.add(start);
         
         solved = false;
+        
+        this.saveLookupHistory = saveLookupHistory;
+        if(saveLookupHistory){
+            history = new ArrayList<Point>();
+        }
+        
         solve();
     }
+
     
+    /**
+     * Solves the shortest (most "cheap") path using A* algorithm
+     */
     private void solve(){
         
         while(!open.isEmpty()){
             
             Node current = open.poll();
+            
+            if(saveLookupHistory){
+                history.add(current.getLocation());
+            }
             
             if(current == goal){
                 solved = true;
@@ -75,6 +98,11 @@ public class Astar {
         }
         solved = false;
     }
+    
+    /**
+     * Returns path after it's solved
+     * @return 
+     */
     public ArrayList<Node> getPath(){
         ArrayList<Node> returnValue = new ArrayList<Node>();
         if(!solved){
@@ -92,5 +120,10 @@ public class Astar {
             }
         }
         return returnValue;
+    }
+    
+    public ArrayList<Point> getLookupHistory(){
+        return this.history;
+        
     }
 }

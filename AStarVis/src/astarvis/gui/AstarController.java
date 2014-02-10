@@ -7,6 +7,7 @@
 package astarvis.gui;
 
 import astarvis.algorithm.Astar;
+import astarvis.algorithm.hfunction.DirectingHFunction;
 import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.Node;
@@ -19,7 +20,7 @@ import java.util.Random;
 import javax.swing.Timer;
 
 /**
- *
+ * AStart GUI controller
  * @author Ilari
  */
 public class AstarController extends Timer implements ActionListener {
@@ -31,6 +32,9 @@ public class AstarController extends Timer implements ActionListener {
     private int w, h;
     
 
+    /**
+     * Initializes GUI controller
+     */
     public AstarController(){
         super(1000,null);
         
@@ -46,11 +50,20 @@ public class AstarController extends Timer implements ActionListener {
         continues = true;
         
     }
+    
+    /**
+     * Sets wether gui should continue
+     * @param c 
+     */
     public void setContinues(boolean c){
         this.continues = c;
     }
     
 
+    /**
+     * Painting invoke
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -59,6 +72,7 @@ public class AstarController extends Timer implements ActionListener {
         
     }
 
+    
     public int getWidth() {
         return w;
     }
@@ -78,9 +92,25 @@ public class AstarController extends Timer implements ActionListener {
     public ArrayList<Node> getPath(){
         return astar.getPath();
     }
+    
+    /**
+     * Resets (and solves)  new A* visualization
+     * @param random 
+     */
     public void reset(boolean random){
         this.g = random ? GraphBuilder.buildRandom(h, w) : GraphBuilder.buildMaze(h, w);
-        this.astar = new Astar(g,new SimpleHFunction());
+        this.astar = new Astar(g,new DirectingHFunction(),true);
+        if(this.d != null){
+            this.d.setTick(0);
+        }
+
+    }
+    
+    public ArrayList<Point> getLookupHistory(int to){
+        if(to >= this.astar.getLookupHistory().size()){
+            return this.astar.getLookupHistory();
+        }
+        return new ArrayList<Point>(this.astar.getLookupHistory().subList(0, to));
     }
 
 }
