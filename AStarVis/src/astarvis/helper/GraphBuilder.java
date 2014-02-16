@@ -13,7 +13,12 @@ import astarvis.ds.Node;
 import astarvis.ds.Point;
 import astarvis.ds.ArrayList;
 import astarvis.ds.HashMap;
+import astarvis.ds.Pair;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 /**
  * Builds different kind of graphs
@@ -148,5 +153,67 @@ public class GraphBuilder {
         Point startPoint = new Point(sx,sy);
         Point endPoint = new Point(ex,ey);
         return GraphBuilder.build(weigths, h, w, startPoint, endPoint);
+    }
+    
+    /**
+     * Builds graph from image
+     * Image must contain
+     * one red pixel
+     * on green pixel
+     * @param imageFile
+     * @return
+     * @throws IOException 
+     */
+    public static Pair<Graph,Point> buildFromImage(String imageFile) throws IOException{
+        final File file = new File(imageFile);
+        final BufferedImage image = ImageIO.read(file);
+        final int h = image.getHeight();
+        final int w = image.getWidth();
+        
+        int weights[][] = new int[h][w];
+        Point sp = null;
+        Point ep = null;
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                final int clr = image.getRGB(x, y);
+                final int red = (clr & 0x00ff0000) >> 16;
+                final int green = (clr & 0x0000ff00) >> 8;
+                final int blue = clr & 0x000000ff;
+                final int gray = (red+green+blue)/3;
+                if(green == 255 && blue+red == 0){
+                    if(sp != null){
+                        System.out.println("More than one startpoint found");
+                        return null;
+                    }
+                    sp = new Point(x,y);
+                    weights[y][x] = 1;
+                }
+                else if(red == 255 && green+blue == 0){
+                    if(ep != null){
+                        System.out.println("More than one endpoint found");
+                        return null;
+                    }
+                    ep = new Point(x,y);
+                    weights[y][x] = 1;
+                } else {
+                    weights[y][x] = 255-gray;
+                    if(weights[y][x] == 0){
+                        weights[y][x] = 5;
+                        
+                    }
+                }
+            }
+        }
+        if(ep == null){
+            System.out.println("Endpoint not found");
+        }
+        if(sp == null){
+            System.out.println("Startpoint not found");
+        }
+        if(ep == null || sp == null){
+            return null;
+        }
+        System.out.println("Loaded image "+w+"x"+h);
+        return new Pair<Graph,Point>(GraphBuilder.build(weights, h, w, sp, ep),new Point(w,h));
     }
 }

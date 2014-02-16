@@ -17,6 +17,7 @@ import astarvis.helper.GraphBuilder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import astarvis.ds.ArrayList;
+import astarvis.ds.Pair;
 import java.util.Random;
 import javax.swing.Timer;
 
@@ -52,6 +53,27 @@ public class AstarController extends Timer implements ActionListener {
         
         continues = true;
         
+    }
+    
+    /**
+     * Initialize A* with graph
+     * @param d 
+     */
+    public AstarController(Pair<Graph,Point> d){
+        super(1000,null);
+        
+        this.w = d.getSecond().getX();
+        this.h = d.getSecond().getY();
+        
+        setDirectingHFunction();
+        
+        this.g = d.getFirst();
+        this.astar = new Astar(this.g,currentHFunction,true);
+        
+        addActionListener(this);
+        setInitialDelay(0);
+        
+        continues = true;
     }
     
     /**

@@ -70,6 +70,9 @@ public class HashMap<T extends Hashable,T2 extends Object> {
      * @return 
      */
     private int locate(T key){
+        if(key == null){
+            return -1;
+        }
         int i = hash(key.hashKey());
         for(int i2 = i; i2 < i + DEFAULT_CAPACITY; i2++){
             if(values[i2 % DEFAULT_CAPACITY] == null){
