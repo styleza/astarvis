@@ -11,8 +11,8 @@ public class DirectingHFunction implements HFunction{
 
     @Override
     public int estimate(Node from, Node goal) {
-        int factor = (goal.getLocation().getX() - from.getLocation().getX()) +
-                (goal.getLocation().getY() - from.getLocation().getY());
+        int factor = Math.abs(goal.getLocation().getX() - from.getLocation().getX()) +
+                Math.abs(goal.getLocation().getY() - from.getLocation().getY());
         
         return (int)((from.getCost() + goal.getCost()) * factor);
         

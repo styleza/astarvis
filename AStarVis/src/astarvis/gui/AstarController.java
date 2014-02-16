@@ -8,6 +8,7 @@ package astarvis.gui;
 
 import astarvis.algorithm.Astar;
 import astarvis.algorithm.hfunction.DirectingHFunction;
+import astarvis.algorithm.hfunction.HFunction;
 import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.Node;
@@ -15,7 +16,7 @@ import astarvis.ds.Point;
 import astarvis.helper.GraphBuilder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import astarvis.ds.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
@@ -27,13 +28,14 @@ public class AstarController extends Timer implements ActionListener {
     private Drawer d;
     private Astar astar;
     private Graph g;
+    private HFunction currentHFunction;
 
     private boolean continues;
     private int w, h;
     
 
     /**
-     * Initializes GUI controller
+     * Initializes A* GUI controller
      */
     public AstarController(){
         super(1000,null);
@@ -41,6 +43,7 @@ public class AstarController extends Timer implements ActionListener {
         this.w = 30;
         this.h = 40;
         
+        setDirectingHFunction();
         reset(true);
         
         
@@ -94,16 +97,41 @@ public class AstarController extends Timer implements ActionListener {
     }
     
     /**
-     * Resets (and solves)  new A* visualization
+     * Resets (and solves)  new A* visualization for random / maze data
      * @param random 
      */
     public void reset(boolean random){
         this.g = random ? GraphBuilder.buildRandom(h, w) : GraphBuilder.buildMaze(h, w);
-        this.astar = new Astar(g,new DirectingHFunction(),true);
+        this.astar = new Astar(g,currentHFunction,true);
         if(this.d != null){
             this.d.setTick(0);
         }
 
+    }
+    /**
+     * Resets (and solves) new A* visualization for composer data
+     * @param g 
+     */
+    public void reset(Graph g){
+        this.g = g;
+        this.astar = new Astar(g,currentHFunction,true);
+        if(this.d != null){
+            this.d.setTick(0);
+        }
+    }
+    
+    /**
+     * Sets heurastic to directing
+     */
+    public void setDirectingHFunction(){
+        this.currentHFunction = new DirectingHFunction();
+    }
+    
+    /**
+     * Sets heurastic to simple
+     */
+    public void setSimpleHFunction(){
+        this.currentHFunction = new SimpleHFunction();
     }
     
     /**
@@ -115,7 +143,7 @@ public class AstarController extends Timer implements ActionListener {
         if(to >= this.astar.getLookupHistory().size()){
             return this.astar.getLookupHistory();
         }
-        return new ArrayList<Point>(this.astar.getLookupHistory().subList(0, to));
+        return new ArrayList<Point>(this.astar.getLookupHistory().subList(to));
     }
 
 }

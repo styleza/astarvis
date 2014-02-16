@@ -7,6 +7,7 @@
 package astarvis.gui;
 
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 /**
  * Key listener for AstarVis
@@ -14,13 +15,17 @@ import java.awt.event.KeyEvent;
  */
 public class KeyListener implements java.awt.event.KeyListener {
     private AstarController ctrl;
+    private JFrame composerFrame;
+    private ComposerController cctrl;
     
     /**
      * Initialize key listener with Astar controller
      * @param ctrl 
      */
-    public KeyListener(AstarController ctrl){
+    public KeyListener(AstarController ctrl,JFrame composerFrame,ComposerController cctrl){
         this.ctrl = ctrl;
+        this.composerFrame = composerFrame;
+        this.cctrl = cctrl;
     }
     
     /**
@@ -35,6 +40,16 @@ public class KeyListener implements java.awt.event.KeyListener {
                 break;
             case KeyEvent.VK_R:
                 ctrl.reset(true);
+                break;
+            case KeyEvent.VK_C:
+                cctrl.reset();
+                composerFrame.setVisible(!composerFrame.isVisible());
+                break;
+            case KeyEvent.VK_N:
+                ctrl.setSimpleHFunction();
+                break;
+            case KeyEvent.VK_D:
+                ctrl.setDirectingHFunction();
                 break;
 
                 

@@ -5,7 +5,7 @@ import astarvis.ds.Graph;
 import astarvis.ds.MinimumHeap;
 import astarvis.ds.Node;
 import astarvis.ds.Point;
-import java.util.ArrayList;
+import astarvis.ds.ArrayList;
 import astarvis.ds.HashMap;
 
 /**
@@ -41,6 +41,7 @@ public class Astar {
         this.cameFrom = new HashMap<Node, Node>();
         this.gScore = new HashMap<Node, Integer>();
         this.open = new MinimumHeap();
+        
         for(Node n : graph.getAllNodes()){
             gScore.put(n,Integer.MAX_VALUE);
         }

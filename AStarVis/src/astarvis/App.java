@@ -1,6 +1,7 @@
 package astarvis;
 
 import astarvis.gui.AstarController;
+import astarvis.gui.ComposerController;
 import astarvis.gui.GUI;
 import javax.swing.SwingUtilities;
 
@@ -15,11 +16,11 @@ public class App {
      */
     public static void main(String[] args) {
         AstarController ctrl = new AstarController();
- 
-        GUI gui = new GUI(ctrl);
+        ComposerController cctrl = new ComposerController(ctrl);
+        GUI gui = new GUI(ctrl,cctrl);
         SwingUtilities.invokeLater(gui);
  
-        while (gui.getDrawer()== null) {
+        while (gui.getDrawer()== null || gui.getComposerDrawer() == null) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
@@ -27,7 +28,9 @@ public class App {
             }
         }
         ctrl.setDrawer(gui.getDrawer());
+        cctrl.setDrawer(gui.getComposerDrawer());
         ctrl.start();
+        cctrl.start();
     }
     
 }

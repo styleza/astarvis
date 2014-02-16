@@ -44,7 +44,8 @@ public class Drawer extends JPanel {
         for(int y = 0; y < h; y++){
             for(int x = 0; x < w; x++){
                 Node n = ctrl.getGraph().getNodeAt(x, y);
-                g.setColor(new Color(255-n.getCost(),255-n.getCost(),255-n.getCost()));
+                int color = Math.max(0,255-n.getCost());
+                g.setColor(new Color(color,color,color));
                 g.fill3DRect(x*scale, y*scale, scale, scale, true);
                 if(n == ctrl.getGraph().getGoal() || n == ctrl.getGraph().getStart()){
                     g.setColor(Color.green);
@@ -62,7 +63,11 @@ public class Drawer extends JPanel {
                 g.drawString(n.getCost()+"", x*scale+1, y*scale+8);
             }
         }
-        g.drawString("Press R to generate (new) Random maze, M to generate Maze", 10, (h+1)*scale);
+        g.drawString("R: generate (new) random grid",10,h*scale+6);
+        g.drawString("M: generate Maze", 10, h*scale+13);
+        g.drawString("C: Show/hide composer", 10, h*scale+20);
+        g.drawString("D: use directing heurastic",150,h*scale+6);
+        g.drawString("N: use simple heurastic",150,h*scale+13);
         tick++;
     }
     

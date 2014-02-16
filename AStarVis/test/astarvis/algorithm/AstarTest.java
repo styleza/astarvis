@@ -9,7 +9,6 @@ package astarvis.algorithm;
 import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.*;
 import astarvis.helper.GraphBuilder;
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

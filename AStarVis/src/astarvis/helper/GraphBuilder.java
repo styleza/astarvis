@@ -11,7 +11,7 @@ import astarvis.algorithm.hfunction.SimpleHFunction;
 import astarvis.ds.Graph;
 import astarvis.ds.Node;
 import astarvis.ds.Point;
-import java.util.ArrayList;
+import astarvis.ds.ArrayList;
 import astarvis.ds.HashMap;
 import java.util.Random;
 
@@ -113,5 +113,40 @@ public class GraphBuilder {
         Point goal = new Point(w-1,h-1);
         
         return GraphBuilder.build(weigth,h,w,start,goal);
+    }
+    
+    /**
+     * Build graph from weight array only
+     * Detects startpoint and endpoint by weights
+     * start weight = 1
+     * end weight = 2
+     * @param weigths
+     * @param h
+     * @param w
+     * @return 
+     */
+    public static Graph buildFromUI(int weigths[][],int h, int w){
+        // locate startpoint and endpoint
+        int sx, sy, ex,ey;
+        sx = sy = 0;
+        ex = w-1;
+        ey = h-1;
+        for(int y = 0; y < h; y++){
+            for(int x = 0; x < w; x++){
+                if(weigths[y][x] == 1){
+                    sx = x;
+                    sy = y;
+                    //weigths[y][x] = 0;
+                }
+                if(weigths[y][x] == 2){
+                    ex = x;
+                    ey = y;
+                    //weigths[y][x] = 0;
+                }
+            }
+        }
+        Point startPoint = new Point(sx,sy);
+        Point endPoint = new Point(ex,ey);
+        return GraphBuilder.build(weigths, h, w, startPoint, endPoint);
     }
 }
