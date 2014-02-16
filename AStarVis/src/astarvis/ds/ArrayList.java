@@ -70,7 +70,7 @@ public class ArrayList<T> implements Iterable<T> {
      * @return 
      */
     private boolean rangeCheck(int i){
-        return i >= 0 && i < data.length;
+        return i >= 0 && i < size;
     }
     
     /**
@@ -146,6 +146,38 @@ public class ArrayList<T> implements Iterable<T> {
                 
             }
         };
+    }
+    
+    /**
+     * Sets element to position i if i is valid
+     * @param i
+     * @param e 
+     */
+    public void set(int i,T e){
+        if(rangeCheck(i)){
+            data[i] = e;
+        }
+    }
+    
+    /**
+     * Checks if ArrayList is empty
+     * @return 
+     */
+    public boolean isEmpty(){
+        return size == 0;
+    }
+    
+    /**
+     * Remove i-th element
+     * @param i 
+     */
+    public void remove(int i){
+        if(!rangeCheck(i)) return;
+        for(int i2 = i; i2 < size -1; i2++){
+            data[i2] = data[i2+1];
+        }
+        data[size - 1] = null;
+        size--;
     }
     
 }

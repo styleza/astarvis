@@ -28,7 +28,8 @@ public class MouseMotionL implements MouseMotionListener {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        if(!ctrl.convertToScale(e.getX(), e.getY()).equals(pp)){
+        Point x = ctrl.convertToScale(e.getX(), e.getY());
+        if(x != null && !x.equals(pp)){
             pp = ctrl.changeWeigth(e.getX(), e.getY());
         }
     }

@@ -87,6 +87,7 @@ public class ComposerController extends Timer implements ActionListener {
      */
     public Point changeWeigth(int x,int y){
         Point p = convertToScale(x,y);
+        if(p == null) return null;
         if(p.getX() < w && p.getY() < h){
             weigths[p.getY()][p.getX()] += 50;
         }
@@ -103,6 +104,7 @@ public class ComposerController extends Timer implements ActionListener {
     public Point convertToScale(int x,int y){
         x = x/d.getScale();
         y = y/d.getScale()-1;
+        if(x < 0 || x >= w || y < 0 || y >= h) return null;
         return new Point(x,y);
     }
     
@@ -134,6 +136,11 @@ public class ComposerController extends Timer implements ActionListener {
      */
     public void reset(){
         this.weigths = new int[h][w];
+        for(int y = 0 ; y < h ; y++){
+            for(int x = 0; x < w ; x++){
+                this.weigths[y][x] = 5;
+            }
+        }
     }
 
 }

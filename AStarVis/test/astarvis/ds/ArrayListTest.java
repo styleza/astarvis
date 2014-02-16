@@ -77,4 +77,40 @@ public class ArrayListTest {
             assertSame(l[i],l2[i]);
         }
     }
+    
+    @Test
+    public void testSet(){
+        Object a = new Object();
+        Object b = new Object();
+        t.add(a);
+        t.set(0,b);
+        assertSame(t.get(0),b);
+    }
+    
+    @Test
+    public void testIsEmpty(){
+        Object a = new Object();
+        assertTrue(t.isEmpty());
+        t.add(a);
+        assertFalse(t.isEmpty());
+        t.remove(0);
+        assertTrue(t.isEmpty());
+    }
+    
+    @Test
+    public void testRemove(){
+        Object a = new Object();
+        t.add(a);
+        t.remove(0);
+        assertTrue(t.isEmpty());
+        assertNull(t.get(0));
+    }
+    @Test
+    public void testInvalidRemove(){
+        Object a = new Object();
+        t.add(a);
+        t.remove(1);
+        assertFalse(t.isEmpty());
+        assertSame(t.get(0),a);
+    }
 }

@@ -1,7 +1,5 @@
 package astarvis.ds;
 
-import java.util.ArrayList;
-
 /**
  * Minimum heap data structure
  * @author ilri@cs
